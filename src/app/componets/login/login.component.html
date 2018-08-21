@@ -1,0 +1,14 @@
+<div id='wrapper'>
+  <div class="fields">
+    <input type="text" placeholder="CPF" name='cpf' [(ngModel)]="credenciais.cpf">
+  </div>
+
+  <div class="fields">
+    <input type="password" placeholder="password" name ='senha' [(ngModel)]="credenciais.senha">
+  </div>
+  <div class="fields">
+    <button (click)="login()">Login</button>
+  </div>
+  <div >
+    <a href="/registrar">Registrar</a></div>
+</div>

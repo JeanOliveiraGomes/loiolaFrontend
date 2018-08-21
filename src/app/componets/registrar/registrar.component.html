@@ -1,0 +1,17 @@
+<div id='wrapper'>
+    <div class="fields">
+      <input type="text" placeholder="CPF" name='cpf' [(ngModel)]="usuario.cpf">
+    </div>
+    <div class="fields">
+        <input type="text" placeholder="nome" name='nome' [(ngModel)]="usuario.nome">
+      </div>
+  
+    <div class="fields">
+      <input type="password" placeholder="password" name ='senha' [(ngModel)]="usuario.senha">
+    </div>
+    <div class="fields">
+      <button (click)="registrar()">cadastrar</button>
+    </div>
+    <div >
+      <a href="/login">Login</a></div>
+  </div>
