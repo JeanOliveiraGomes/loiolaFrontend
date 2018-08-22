@@ -10,7 +10,7 @@ import { Router} from '@angular/router';
 })
 export class LoginComponent implements OnInit {
 
-  credenciais = { cpf: null, senha:''};
+  credenciais = { username: null, password:''};
 
 
   constructor( private router: Router,private usuarioService:UsuarioService) { }
