@@ -1,17 +1,28 @@
-<div id='wrapper'>
-    <div class="fields">
-      <input type="text" placeholder="CPF" name='cpf' [(ngModel)]="usuario.cpf">
+<div class="container">
+  <div class="card card-container">
+    <!-- <img class="profile-img-card" src="//lh3.googleusercontent.com/-6V8xOA6M7BA/AAAAAAAAAAI/AAAAAAAAAAA/rzlHcD0KYwo/photo.jpg?sz=120" alt="" /> -->
+    <div class="box-header with-border">
+      <h3 class="box-title">Hotel 8 | Login</h3>
     </div>
-    <div class="fields">
-        <input type="text" placeholder="nome" name='nome' [(ngModel)]="usuario.nome">
+    <p id="profile-name" class="profile-name-card"></p>
+    <form class="form-signin">
+      <span id="reauth-email" class="reauth-email"></span>
+      <div class="fields">
+        <input type="text" name='cpf' class="form-control" placeholder="CPF" required autofocus [(ngModel)]="usuario.cpf">
       </div>
-  
-    <div class="fields">
-      <input type="password" placeholder="password" name ='senha' [(ngModel)]="usuario.senha">
-    </div>
-    <div class="fields">
-      <button (click)="registrar()">cadastrar</button>
-    </div>
-    <div >
-      <a href="/login">Login</a></div>
+      <div class="fields">
+        <input type="text" name='' class="form-control" placeholder="Informe seu nome.." required autofocus [(ngModel)]="usuario.nome">
+      </div>
+      <div class="fields">
+        <input type="password" name='senha' class="form-control" placeholder="Infoeme uma senha" required [(ngModel)]="usuario.senha">
+      </div>
+      <div class="fields">
+        <button class="btn btn-lg btn-primary btn-block btn-signin" type="submit" (click)="registrar()">Cadastrar</button>
+      </div>
+    </form>
+    <!-- /form -->
+    <a href="/login" class="">
+      Login
+    </a>
   </div>
+</div>
