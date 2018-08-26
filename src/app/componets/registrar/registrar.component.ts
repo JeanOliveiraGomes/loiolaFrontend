@@ -17,7 +17,7 @@ export class RegistrarComponent implements OnInit {
 
   registrar(){
     this.usuarioService.cadastrar(this.usuario).subscribe((resp) => {
-      this.router.navigate(['']);
+      this.router.navigate(['login']);
     }, (error) => {
       
     }); 
