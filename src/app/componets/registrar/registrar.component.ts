@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { UsuarioService } from './../../services/usuario/usuario.service';
 import { Component, OnInit } from '@angular/core';
 
@@ -9,14 +10,14 @@ import { Component, OnInit } from '@angular/core';
 export class RegistrarComponent implements OnInit {
   usuario = { cpf: '', senha:'', nome:''};
   
-  constructor(private usuarioService: UsuarioService) { }
+  constructor(private router: Router,private usuarioService: UsuarioService) { }
 
   ngOnInit() {
   }
 
   registrar(){
     this.usuarioService.cadastrar(this.usuario).subscribe((resp) => {
-      
+      this.router.navigate(['']);
     }, (error) => {
       
     }); 

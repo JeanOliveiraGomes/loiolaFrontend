@@ -10,7 +10,7 @@ import { Router} from '@angular/router';
 })
 export class LoginComponent implements OnInit {
 
-  credenciais = { cpf: null, senha:''};
+  credenciais = { username: null, password:null};
 
 
   constructor( private router: Router,private usuarioService:UsuarioService) { }
@@ -23,7 +23,7 @@ export class LoginComponent implements OnInit {
     this.usuarioService.login(this.credenciais).subscribe((data: any)=>{
       console.log(data);
       this.usuarioService.token = data;
-      this.router.navigate(['/home']);
+      this.router.navigate(['checkin']);
     }, error =>{
      
     });  
