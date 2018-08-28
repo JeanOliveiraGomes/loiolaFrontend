@@ -13,7 +13,7 @@ export class LoginComponent implements OnInit {
   credenciais = { username: null, password:null};
 
 
-  constructor( private router: Router,private usuarioService:UsuarioService) { }
+  constructor( private router: Router,public usuarioService:UsuarioService) { }
 
   ngOnInit() {
   }
@@ -21,8 +21,6 @@ export class LoginComponent implements OnInit {
 
   login(){
     this.usuarioService.login(this.credenciais).subscribe((data: any)=>{
-      console.log(data);
-      this.usuarioService.token = data;
       this.router.navigate(['checkin']);
     }, error =>{
      

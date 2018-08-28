@@ -6,13 +6,18 @@ import { HttpHeaders } from '../../../../node_modules/@angular/common/http';
   providedIn: 'root'
 })
 export class UsuarioService {
-  token:string =null;
+  token:any =null;
 
-  constructor(private api: ApiService) { }
+  constructor(public api: ApiService) { }
 
   login(credenciais: any){
   
-    let request = this.api.post('login',credenciais, {responseType: 'text'});
+    let request = this.api.post('login',credenciais, {responseType: 'text'})
+
+    request.subscribe(data=>{
+      const resp =  data
+      this.token = resp;
+    });
     return request;
   }
 
@@ -20,6 +25,10 @@ export class UsuarioService {
     let headers = new HttpHeaders().set('Content-Type','application/json');
     let requisicao = this.api.post('usuarios',usuario,{headers});
     return requisicao;
+  }
+
+  getToken(){
+    return this.token;
   }
 
 }
