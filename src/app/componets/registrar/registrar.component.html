@@ -5,20 +5,20 @@
       <h3 class="box-title">Hotel 8 | Login</h3>
     </div>
     <p id="profile-name" class="profile-name-card"></p>
-    <form class="form-signin">
+    <form #frm="ngForm" (ngSubmit)="adicionar(frm)" class="form-signin">
       <span id="reauth-email" class="reauth-email"></span>
       <div class="fields">
-        <input type="text" name='cpf' class="form-control" placeholder="CPF" required autofocus [(ngModel)]="usuario.cpf">
-      </div>
+          <p-inputMask mask="999.999.999-99" type="text" name='cpf' class="form-control" placeholder="CPF"  required autofocus [(ngModel)]="usuario.cpf" [required]="true"></p-inputMask>
+        </div>
       <div class="fields">
-        <input type="text" name='nome' class="form-control" placeholder="Informe seu nome.." required autofocus [(ngModel)]="usuario.nome">
-      </div>
+          <input type="text" name='nome' class="form-control" placeholder="Informe seu nome.." required autofocus [(ngModel)]="usuario.nome" [required]="true">
+         </div>
       <div class="fields">
-        <input type="password" name='senha' class="form-control" placeholder="Infoeme uma senha" required [(ngModel)]="usuario.senha">
-      </div>
+          <input type="password" name='senha' class="form-control" placeholder="Infoeme uma senha" required [(ngModel)]="usuario.senha" [required]="true">
+        </div>
       <div class="fields">
-        <button class="btn btn-lg btn-primary btn-block btn-signin" type="submit" (click)="registrar()">Cadastrar</button>
-      </div>
+          <button class="btn btn-lg btn-primary btn-block btn-signin" type="submit" (click)="registrar()" [disabled]="frm.invalid">Cadastrar</button>
+        </div>
     </form>
     <!-- /form -->
     <a href="/login" class="">

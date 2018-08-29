@@ -8,6 +8,8 @@ import { LoginComponent } from './componets/login/login.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { HomeComponent } from './componets/home/home.component';
 import { CheckInComponent } from './componets/check-in/check-in.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { DataTableModule, ButtonModule, InputTextModule, InputMaskModule, CalendarModule } from 'primeng/primeng';
 
 @NgModule({
   declarations: [
@@ -24,7 +26,14 @@ import { CheckInComponent } from './componets/check-in/check-in.component';
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    ReactiveFormsModule   
+    ReactiveFormsModule ,
+    BrowserAnimationsModule,
+    DataTableModule,
+    ButtonModule,
+    InputTextModule,
+    InputMaskModule,
+    CalendarModule
+  
   ],
   providers: [],
   bootstrap: [AppComponent]

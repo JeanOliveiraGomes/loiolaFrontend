@@ -1,109 +1,129 @@
 <div class="container">
-  <h1>Reserva de Quartos</h1>
-  <form [formGroup]="userForm" (ngSubmit)="onSubmit(userForm)">
-    <div class="row">
-      <div class="form-group col-md-3">
-        <label>Data checkin</label>
-        <input type="text" class="form-control" placeholder="*dd/MM/yyyy" id="checkin" formControlName="checkin">
-        <div class="validation-errors">
-          <ng-container *ngFor="let validation of validation_messages.checkin">
-            <div class="error-message" *ngIf="userForm.get('checkin').hasError(validation.type) && (userForm.get('checkin').dirty || userForm.get('checkin').touched)">
-              <p>{{ validation.message }}</p>
-            </div>
-          </ng-container>
+    <h1>Reserva de Quartos</h1>
+    <form [formGroup]="userForm" (ngSubmit)="onSubmit(userForm)">
+      <div class="row">
+        <div class="form-group col-md-3">
+          <label>Data checkin</label>
+          <input type="text" class="form-control" placeholder="*dd/MM/yyyy" id="checkin" formControlName="checkin">
+          <div class="validation-errors">
+            <ng-container *ngFor="let validation of validation_messages.checkin">
+              <div class="error-message" *ngIf="userForm.get('checkin').hasError(validation.type) && (userForm.get('checkin').dirty || userForm.get('checkin').touched)">
+                <p>{{ validation.message }}</p>
+              </div>
+            </ng-container>
+          </div>
+        </div>
+        <div class="form-group col-md-3">
+          <label>Data checkin</label>
+          <input type="text" class="form-control" placeholder="*dd/MM/yyyy" id="checkout" formControlName="checkout">
+          <div class="validation-errors">
+            <ng-container *ngFor="let validation of validation_messages.checkout">
+              <div class="error-message" *ngIf="userForm.get('checkout').hasError(validation.type) && (userForm.get('checkout').dirty || userForm.get('checkout').touched)">
+                <p>{{ validation.message }}</p>
+              </div>
+            </ng-container>
+          </div>
         </div>
       </div>
-
-      <div class="form-group col-md-3">
-        <label>Data checkin</label>
-        <input type="text" class="form-control" placeholder="*dd/MM/yyyy" id="checkout" formControlName="checkout">
-        <div class="validation-errors">
-          <ng-container *ngFor="let validation of validation_messages.checkout">
-            <div class="error-message" *ngIf="userForm.get('checkout').hasError(validation.type) && (userForm.get('checkout').dirty || userForm.get('checkout').touched)">
-              <p>{{ validation.message }}</p>
-            </div>
-          </ng-container>
+      <br>
+      <button [disabled]="!userForm.valid" type="submit" class="btn btn-primary">Verificar disponibilidade de quartos</button>
+    </form>
+    <div class="form-row" *ngIf="quartosDisponiveis">
+  
+      <h4>Para o seu conforto temos {{quartosDisponiveis.length}} tipos de quartos disponiveis, são eles: </h4>
+  
+      <div class="form-group col-md-3" *ngFor="let d  of  quartosDisponiveis">
+        <div class="list-group">
+  
+          <h4 class="list-group-item-heading">{{d.descricao}}</h4>
+          <p class="list-group-item-text">Valor: {{d.valor}}</p>
+          <p class="list-group-item-text">Quantidade: {{d.quantidade}}</p>
         </div>
       </div>
-
+    </div>
+    <hr>
+  </div>
+  <div *ngIf="quartosDisponiveis" class="container">
+    <hr>
+    <h2>Faça agora mesmo sua reserva</h2>
+    <div class="col-md-6">
+      <form [formGroup]="reservaForm" (ngSubmit)="onSubmitReserva(reservaForm)">
+        <div class="row">
+          <div class="form-group col-md-6">
+            <label>Data checkin</label>
+            <input type="text" [value]="reservaData.dataCheckin" [(ngModel)]="reservaData.dataCheckin" class="form-control" placeholder="*dd/MM/yyyy"
+              id="checkin" formControlName="dataCheckin">
+          </div>
+          <div class="form-group col-md-6">
+            <label>Data checkout</label>
+            <input type="text" [value]="reservaData.dataCheckout" [(ngModel)]="reservaData.dataCheckout" class="form-control" placeholder="*dd/MM/yyyy"
+              id="checkout" formControlName="dataCheckout">
+          </div>
+        </div>
+        <br>
+        <button [disabled]="!reservaForm.valid" type="submit" class="btn btn-primary">Efetua reserva</button>
+      </form>
+    </div>
+    <div class="col-md-6">
+      <form [formGroup]="quartosForm" (ngSubmit)="addQuarto(quartosForm)">
+        <div class="row">
+          <div class="form-group col-md-3">
+            <label>Quarto</label>
+            <select class="form-control" formControlName="idQuarto">
+              <option selected>*</option>
+              <option [value]="d.descricao" *ngFor="let d  of  quartosDisponiveis">{{d.descricao}}</option>
+            </select>
+          </div>
+          <div class="form-group col-md-3">
+            <label>Quantidade</label>
+            <input type="text" class="form-control" placeholder="*" id="checkout" formControlName="quantidade">
+          </div>
+          <br>
+          <button [disabled]="!quartosForm.valid" type="submit" class="btn btn-primary">Add quarto</button>
+        </div>
+      </form>
     </div>
     <br>
-    <button [disabled]="!userForm.valid" type="submit" class="btn btn-primary">Verificar disponibilidade de quartos</button>
-  </form>
-  <div class="form-row" *ngIf="quartosDisponiveis">
-
-    <h4>Para o seu conforto temos {{quartosDisponiveis.length}} tipos de quartos disponiveis, são eles: </h4>
-
-    <div class="form-group col-md-3" *ngFor="let d  of  quartosDisponiveis">
-      <div class="list-group">
-
-        <h4 class="list-group-item-heading">{{d.descricao}}</h4>
-        <p class="list-group-item-text">Valor: {{d.valor}}</p>
-        <p class="list-group-item-text">Quantidade: {{d.quantidade}}</p>
+  </div>
+  <div class="container" *ngIf="reservadoUsuario">
+    <div class="jumbotron">
+      <h1 class="display-4">Sua reserva esta cadastrada!</h1>
+      <p class="lead">Aproveite cada momento no nosso estabelecimento.</p>
+      <hr class="my-4">
+      <p>
+        <label>Detalhes da reserva:</label>
+      </p>
+      <div class="row">
+        <div class="form-group col-md-4">
+          <h3>Nome do usuario: </h3>
+          <p> {{reservadoUsuario.usuario.nome}}</p>
+          <h3>CPF: </h3>
+          <p> {{reservadoUsuario.usuario.cpf}}</p>
+          <h3>Data checkin: </h3>
+          <p> {{reservadoUsuario.dataCheckin}}</p>
+          <h3>Data chekout: </h3>
+          <p> {{reservadoUsuario.dataCheckout}}</p>
+        </div>
+        <div class="form-group col-md-8">
+          <label>Relação de quartos</label>
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>QDT</th>
+                <th>Quarto</th>
+                <th>Valor</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let d of quartosReservaUsuario">
+                <td>{{d.quantidade}}</td>
+                <td>{{d.quarto.descricao}}</td>
+                <td>{{d.quarto.valor}} total: {{d.quantidade * d.quarto.valor}} R$</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <hr>
       </div>
     </div>
   </div>
-  <hr>
-
-</div>
-<div *ngIf="quartosDisponiveis" class="container">
-  <hr>
-  <h2>Faça agora mesmo sua reserva</h2>
-  <form [formGroup]="reservaForm" (ngSubmit)="onSubmitReserva(reservaForm)">
-    <div class="row">
-      <div class="form-group col-md-3">
-        <label>Data checkin</label>
-        <input type="text" [value]="reservaData.dataCheckin" [(ngModel)]="reservaData.dataCheckin" class="form-control" placeholder="*dd/MM/yyyy"
-          id="checkin" formControlName="dataCheckin">
-      </div>
-
-      <div class="form-group col-md-3">
-        <label>Data checkout</label>
-        <input type="text" [value]="reservaData.dataCheckout" [(ngModel)]="reservaData.dataCheckout" class="form-control" placeholder="*dd/MM/yyyy"
-          id="checkout" formControlName="dataCheckout">
-      </div>
-      <div class="form-group col-md-3">
-        <label>Quarto</label>
-        <select class="form-control" formControlName="quarto">
-          <option selected>Qtd...</option>
-          <option [value]="d.descricao" *ngFor="let d  of  quartosDisponiveis">{{d.descricao}}</option>
-        </select>
-
-      </div>
-      <div class="form-group col-md-3">
-        <label>Quantidade</label>
-        <input type="text" class="form-control" placeholder="*Qtd" id="checkout" formControlName="quantidade">
-      </div>
-
-    </div>
-    <br>
-    <button [disabled]="!reservaForm.valid" type="submit" class="btn btn-primary">Efetua reserva</button>
-  </form>
-  <br>
-</div>
-<div class="container" *ngIf="responseReserva">
-  <div class="jumbotron">
-    <h1 class="display-4">Sua reserva esta cadastrada!</h1>
-    <p class="lead">Aproveite cada momento no nosso estabelecimento.</p>
-    <hr class="my-4">
-    <p>
-      <label>Detalhes da reserva:</label>
-    </p>
-    <div class="row">
-      <div class="col-md-6">
-        <h3>Data checkin: </h3>
-        <p> {{responseReserva.dataCheckin}}</p>
-      </div>
-      <div class="col-md-6">
-        <h3>Data checkout</h3>
-        <p>{{responseReserva.dataCheckout}}</p>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-6">
-        <h3>Quantidade : {{reservaData.quartos[0].quantidade}}</h3>
-
-      </div>
-    </div>
-  </div>
-</div>
