@@ -76,7 +76,7 @@
           </div>
           <div class="form-group col-md-3">
             <label>Quantidade</label>
-            <input type="text" class="form-control" placeholder="*" id="checkout" formControlName="quantidade">
+            <input type="number" min='0' class="form-control" placeholder="*" id="checkout" formControlName="quantidade">
           </div>
           <br>
           <button [disabled]="!quartosForm.valid" type="submit" class="btn btn-primary">Add quarto</button>
@@ -87,7 +87,7 @@
   </div>
   <div class="container" *ngIf="reservadoUsuario">
     <div class="jumbotron">
-      <h1 class="display-4">Sua reserva esta cadastrada!</h1>
+      <h1 class="display-4" id="asdf">Sua reserva esta cadastrada!</h1>
       <p class="lead">Aproveite cada momento no nosso estabelecimento.</p>
       <hr class="my-4">
       <p>

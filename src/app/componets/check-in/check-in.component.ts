@@ -122,7 +122,8 @@ export class CheckInComponent implements OnInit {
         }
       }
     })
-    this.quartosSelecionados = this.reservaData.quartos
+    this.quartosSelecionados = this.reservaData.quartos;
+    
 
 
 
@@ -138,10 +139,11 @@ export class CheckInComponent implements OnInit {
       const response = (data as any);
       this.reservadoUsuario = response
       
-      console.log(this.reservadoUsuario)
-      this.quartosReservaUsuario =  this.reservadoUsuario.quartos
-      console.log(this.quartosReservaUsuario)
-      
+      console.log(this.reservadoUsuario);
+      this.quartosReservaUsuario =  this.reservadoUsuario.quartos;
+      console.log(this.quartosReservaUsuario);
+      this.onSubmit(this.userForm);
+
     })
 
 

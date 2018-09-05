@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { ApiService } from './../api/api.service';
 import { Injectable } from '@angular/core';
 import { HttpHeaders } from '../../../../node_modules/@angular/common/http';
@@ -8,15 +9,16 @@ import { HttpHeaders } from '../../../../node_modules/@angular/common/http';
 export class UsuarioService {
   token:any =null;
 
-  constructor(public api: ApiService) { }
+  constructor(public api: ApiService,private router: Router) { }
 
   login(credenciais: any){
   
     let request = this.api.post('login',credenciais, {responseType: 'text'})
 
     request.subscribe(data=>{
-      const resp =  data
+      const resp =  data;
       this.token = resp;
+      this.router.navigate(['checkin']);
     });
     return request;
   }
