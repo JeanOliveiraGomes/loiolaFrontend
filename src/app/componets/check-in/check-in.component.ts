@@ -1,7 +1,8 @@
+import { Router } from '@angular/router';
+import { UsuarioService } from './../../services/usuario/usuario.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl, AbstractControl } from '@angular/forms';
 import { QuartoService } from '../../services/quarto/quarto.service';
-import { UsuarioService } from '../../services/usuario/usuario.service'
 
 
 @Component({
@@ -58,10 +59,13 @@ export class CheckInComponent implements OnInit {
   constructor(
     public formBuilder: FormBuilder,
     private quartoService: QuartoService,
-    public usuarioService: UsuarioService
-
+    public usuarioService: UsuarioService,
+    private router: Router
+    
   ) {
-
+    if(usuarioService.token==null){
+      this.router.navigate(['login']);
+    }
   }
 
   ngOnInit() {
